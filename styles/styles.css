@@ -1,53 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-body {
-  font-family: sans-serif;
-  background-image: url("https://images.pexels.com/photos/957061/milky-way-starry-sky-night-sky-star-957061.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200");
-}
-#app {
-  height: 100%;
+.grilla {
+  height: 560px;
+  width: 560px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  background-color: pink;
 }
-/*Titulo*/
-h1 {
-  color: white;
-  font-family: "Press Start 2P", cursive;
-}
-/*PANEL DE CONTROL*/
-#panelControl {
-  height: 35px;
-  background-color: white;
-}
-/*CAJA JUEGO*/
-#gameBox {
-  background-color: white;
-  opacity: 0.5;
-  margin-bottom: 15px;
-}
-.container {
-  display: grid;
-  grid-template-columns: 53px 53px 53px 53px 53px 53px 53px 53px 53px;
-  grid-template-rows: 53px 53px 53px 53px 53px 53px 53px 53px 53px;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . .";
-  width: 100%;
-  height: 100%;
-}
-
-/*Button Timer*/
-#btnTimer {
-  width: 10%;
-  height: 30px;
+.grilla div {
+  height: 70px;
+  width: 70px;
 }
