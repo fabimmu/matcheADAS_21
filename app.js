@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function createBoard() {
-    for (let i = 0; i < widthFacil * widthFacil; i++) {
+    for (let i = 0; i <= widthFacil * widthFacil; i++) {
       const square = document.createElement("div");
       //square.setAttribute("draggable", true);
       square.setAttribute("class", "item");
