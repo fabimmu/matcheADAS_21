@@ -30,8 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
       square.setAttribute("class", "item");
       let randomColor = Math.floor(Math.random() * frutas.length);
       square.style.backgroundImage = frutas[randomColor];
-      document.getElementsByClassName("item")[i].style.backgroundSize = "cover";
-      console.log(document.getElementsByClassName("item"));
+      var elementos = Array.from(document.getElementsByClassName("item"));
+      for (let item of elementos) {
+        item.style.backgroundSize = "cover";
+      }
+
       grilla.appendChild(square);
       squaresFacil.push(square);
     }
