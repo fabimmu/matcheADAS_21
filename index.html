@@ -5,14 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
-    <title>Document</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/46da04e41b.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>MatcheADAS</title>
   </head>
   <body>
     <div id="contenedor">
       <!--TITULO-->
       <h1>MatcheADAS</h1>
       <!--MANDO CONTROL-->
-      <div id="panelControl"></div>
+      <div id="panelControl">
+        <div class="puntaje disp_row">
+          <p>Combo x</p>
+          <p>Puntos:</p>
+        </div>
+        <div class="controles disp_row">
+          <i class="fas fa-info-circle"></i>
+          <i class="fas fa-redo-alt"></i>
+        </div>
+      </div>
       <!--CAJA JUEGO-->
       <div class="grilla"></div>
       <!--TIMER-->
