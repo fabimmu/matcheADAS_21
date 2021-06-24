@@ -10,12 +10,12 @@
       src="https://kit.fontawesome.com/46da04e41b.js"
       crossorigin="anonymous"
     ></script>
-    <title>MatcheADAS</title>
+    <title>MatcheADAs</title>
   </head>
   <body>
     <div id="contenedor">
       <!--TITULO-->
-      <h1>MatcheADAS</h1>
+      <h1>MatcheADAs</h1>
       <!--MANDO CONTROL-->
       <div id="panelControl">
         <div class="puntaje disp_row">
@@ -31,6 +31,22 @@
       <div class="grilla"></div>
       <!--TIMER-->
       <div id="tiempo"></div>
+    </div>
+    <div
+      class="modal oculto"
+      id="modal-nuevo-juego"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h2 class="modal-titulo">Nuevo Juego</h2>
+      <div class="modal-contenido">
+        <p class="modal-texto">Seleccione una dificultad</p>
+      </div>
+      <div class="modal-botones">
+        <button class="boton" id="btn-modo-facil">Fácil</button>
+        <button class="boton" id="btn-modo-normal">Normal</button>
+        <button class="boton" id="btn-modo-dificil">Difícil</button>
+      </div>
     </div>
     <script src="./app.js"></script>
   </body>

@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const grilla = document.querySelector(".grilla");
-  const widthFacil = 8;
+  const width = 8;
   const squaresFacil = [];
+  let score = 0;
+
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => document.querySelectorAll(selector);
 
   const frutas = [
     "url(./styles/img/1F34B_color.png)",
@@ -12,8 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "url(./styles/img/1F965_color.png)",
   ];
 
+  /* Grilla */
   function createBoard() {
-    for (let i = 0; i <= widthFacil * widthFacil; i++) {
+    for (let i = 0; i <= width * width; i++) {
       const square = document.createElement("div");
       square.setAttribute("class", "item");
       let randomColor = Math.floor(Math.random() * frutas.length);
@@ -37,3 +42,31 @@ swal({
 
   button: "A jugar!",
 });
+
+
+/* Tañamo según nivel */
+const changeLevel = (level) => {
+  if (level === "facil") {
+    width = 9;
+  } else if (level === "normal") {
+    width = 8;
+  } else {
+    width = 7;
+  }
+};
+
+/* Inicializar modales */
+const modales = () => {
+  $("#btn-modo-facil").addEventListener("click", () => {
+    changeLevel("facil");
+    //startGame();
+  });
+  $("#btn-modo-normal").addEventListener("click", () => {
+    changeLevel("normal");
+    //startGame();
+  });
+  $("#btn-modo-dificil").addEventListener("click", () => {
+    changeLevel("dificil");
+    //startGame();
+  });
+};
