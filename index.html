@@ -32,6 +32,32 @@
       <!--TIMER-->
       <div id="tiempo"></div>
     </div>
+
+    <!-- Modal Bienvenida -->
+    <div class="modal" id="modal-bienvenida" role="dialog" aria-modal="true">
+      <h2 class="modal-titulo">¡Bienvenida!</h2>
+      <div class="modal-contenido">
+        <p class="modal-texto">
+          En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo,
+          ya sea en fila o columna. Para eso, selecciona un ítem y a
+          continuación un ítem adyacente para intercambiarlos de lugar.
+        </p>
+
+        <p class="modal-texto">
+          E Si se forma un grupo, esos ítems se eliminarán y ganarás puntos.
+          ¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!
+        </p>
+        <strong class="modal-texto">controles</strong>
+        <p>Click izquierdo: selección</p>
+        <p>Enter o Espacio: selección</p>
+        <p>Flechas o WASD: movimiento e intercambio</p>
+      </div>
+      <div class="modal-botones">
+        <button class="boton" id="btn-jugar">A Jugar!</button>
+      </div>
+    </div>
+
+    <!--Modal Nuevo Juego -->
     <div
       class="modal oculto"
       id="modal-nuevo-juego"

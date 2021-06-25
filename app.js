@@ -33,40 +33,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  createBoard();
+  /* Tañamo según nivel */
+  const changeLevel = (level) => {
+    if (level === "facil") {
+      width = 9;
+    } else if (level === "normal") {
+      width = 8;
+    } else {
+      width = 7;
+    }
+  };
+
+  /* Inicializar modales */
+
+  const modales = () => {
+    $("#btn-jugar").addEventListener("click", () => {
+      $("#modal-bienvenida").classList.add("oculto");
+      $("#modal-nuevo-juego").classList.remove("oculto");
+    });
+
+    $("#btn-modo-facil").addEventListener("click", () => {
+      changeLevel("facil");
+      //startGame();
+    });
+    $("#btn-modo-normal").addEventListener("click", () => {
+      createBoard();
+      //changeLevel("normal");
+      //startGame();
+      $("#modal-nuevo-juego").classList.add("oculto");
+    });
+    $("#btn-modo-dificil").addEventListener("click", () => {
+      changeLevel("dificil");
+      //startGame();
+    });
+  };
+
+  modales();
 });
-
-swal({
-  title: "Bienvenida!",
-  text: "En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo, ya sea en fila o columna. \n Para eso, selecciona un ítem y a continuación un ítem adyacente para intercambiarlos de lugar. \n\n Si se forma un grupo, esos ítems se eliminarán y ganarás puntos. ¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo! \n\n Controles \n\n Click izquierdo: selección \n Enter o Espacio: selección \n Flechas o WASD: movimiento e intercambio",
-
-  button: "A jugar!",
-});
-
-
-/* Tañamo según nivel */
-const changeLevel = (level) => {
-  if (level === "facil") {
-    width = 9;
-  } else if (level === "normal") {
-    width = 8;
-  } else {
-    width = 7;
-  }
-};
-
-/* Inicializar modales */
-const modales = () => {
-  $("#btn-modo-facil").addEventListener("click", () => {
-    changeLevel("facil");
-    //startGame();
-  });
-  $("#btn-modo-normal").addEventListener("click", () => {
-    changeLevel("normal");
-    //startGame();
-  });
-  $("#btn-modo-dificil").addEventListener("click", () => {
-    changeLevel("dificil");
-    //startGame();
-  });
-};
