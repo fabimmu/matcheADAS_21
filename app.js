@@ -40,17 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* Tañamo según nivel */
-  const changeLevel = (level) => {
-    if (level === "facil") {
-      width = 9;
-    } else if (level === "normal") {
-      width = 8;
-    } else {
-      width = 7;
-    }
-  };
-
   /* Inicializar modales */
 
   const modales = () => {
@@ -58,22 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
       $("#modal-bienvenida").classList.add("oculto");
       $("#modal-nuevo-juego").classList.remove("oculto");
     });
-
+    
     $("#btn-modo-facil").addEventListener("click", () => {
       createBoard(9, 630);
-      //changeLevel("facil");
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-normal").addEventListener("click", () => {
       createBoard(8, 560);
-      //changeLevel("normal");
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
       createBoard(7, 490);
-      //changeLevel("dificil");
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
