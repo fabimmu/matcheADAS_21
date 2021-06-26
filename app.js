@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const grilla = document.querySelector(".grilla");
-  const width = 8;
-  const squaresFacil = [];
+  const squares = [];
   let score = 0;
 
   const $ = (selector) => document.querySelector(selector);
@@ -16,20 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
     "url(./styles/img/1F965_color.png)",
   ];
 
+  /* Random */
+
+  const random = () => {
+    const indice = Math.floor(Math.random() * frutas.length);
+    return frutas[indice];
+  };
+
   /* Grilla */
-  function createBoard() {
-    for (let i = 0; i <= width * width; i++) {
+  function createBoard(tamanio, lado) {
+    for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
       square.setAttribute("class", "item");
-      let randomColor = Math.floor(Math.random() * frutas.length);
-      square.style.backgroundImage = frutas[randomColor];
-      var elementos = Array.from(document.getElementsByClassName("item"));
+      square.style.backgroundImage = random();
+      grilla.style.width = `${lado}px`;
+      grilla.style.height = `${lado}px`;
+      let elementos = Array.from(document.getElementsByClassName("item"));
       for (let item of elementos) {
         item.style.backgroundSize = "cover";
       }
 
       grilla.appendChild(square);
-      squaresFacil.push(square);
+      squares.push(square);
     }
   }
 
@@ -53,18 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $("#btn-modo-facil").addEventListener("click", () => {
-      changeLevel("facil");
+      createBoard(9, 630);
+      //changeLevel("facil");
       //startGame();
+      $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-normal").addEventListener("click", () => {
-      createBoard();
+      createBoard(8, 560);
       //changeLevel("normal");
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
-      changeLevel("dificil");
+      createBoard(7, 490);
+      //changeLevel("dificil");
       //startGame();
+      $("#modal-nuevo-juego").classList.add("oculto");
     });
   };
 
