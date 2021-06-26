@@ -40,17 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* Tañamo según nivel */
-  const changeLevel = (level) => {
-    if (level === "facil") {
-      width = 9;
-    } else if (level === "normal") {
-      width = 8;
-    } else {
-      width = 7;
-    }
-  };
-
   /* Inicializar modales */
 
   const modales = () => {
@@ -80,4 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   modales();
+  /*Info Button*/
+  let info = false;
+  $("#info-btn").addEventListener("click", () => {
+    info = true;
+    $("#modal-bienvenida").classList.remove("oculto");
+    if (info) {
+      $("#btn-jugar").addEventListener("click", () => {
+        $("#modal-nuevo-juego").classList.add("oculto");
+      });
+    }
+  });
 });
