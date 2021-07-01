@@ -52,19 +52,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     $("#btn-modo-facil").addEventListener("click", () => {
       createBoard(9, 630);
-      //changeLevel("facil");
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-normal").addEventListener("click", () => {
       createBoard(8, 560);
-      //changeLevel("normal");
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
       createBoard(7, 490);
-      //changeLevel("dificil");
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   modales();
 
   /*Info Button*/
+  /*Button Info */
   let info = false;
   $("#info-btn").addEventListener("click", () => {
     info = true;
@@ -100,4 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#btn-nuevo-juego").addEventListener("click", () => {
     $("#modal-nuevo-juego").classList.remove("oculto");
   });
+  /*  */
+  const countdown = () => {
+    let seconds = document.getElementById("countdown").textContent;
+    let countdown = setInterval(function () {
+      seconds--;
+      document.getElementById("countdown").textContent = seconds;
+      if (seconds <= 0) clearInterval(countdown);
+    }, 1000);
+  };
 });
