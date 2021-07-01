@@ -117,3 +117,7 @@ h1 {
 .oculto {
   display: none;
 }
+
+.timer {
+  background-color: white;
+}

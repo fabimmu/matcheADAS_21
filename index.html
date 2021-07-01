@@ -30,7 +30,9 @@
       <!--CAJA JUEGO-->
       <div class="grilla"></div>
       <!--TIMER-->
-      <div id="tiempo"></div>
+      <div class="timer" id="tiempo">
+        <span>00:</span><span id="countdown">30</span>
+      </div>
     </div>
 
     <!-- Modal Bienvenida -->
@@ -72,6 +74,23 @@
         <button class="boton" id="btn-modo-facil">Fácil</button>
         <button class="boton" id="btn-modo-normal">Normal</button>
         <button class="boton" id="btn-modo-dificil">Difícil</button>
+      </div>
+    </div>
+
+    <!--Modal Juego terminado -->
+    <div
+      class="modal oculto"
+      id="modal-juego-terminado"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h2 class="modal-titulo">¡Juego terminado!</h2>
+      <div class="modal-contenido">
+        <p class="modal-texto">Puntaje final: 00</p>
+      </div>
+      <div class="modal-botones">
+        <button class="boton" id="btn-nuevo-juego">Nuevo juego</button>
+        <button class="boton" id="btn-reiniciar-juego">reiniciar</button>
       </div>
     </div>
     <script src="./app.js"></script>
