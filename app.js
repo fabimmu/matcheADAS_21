@@ -47,26 +47,30 @@ document.addEventListener("DOMContentLoaded", () => {
       $("#modal-bienvenida").classList.add("oculto");
       $("#modal-nuevo-juego").classList.remove("oculto");
     });
-    
+
     $("#btn-modo-facil").addEventListener("click", () => {
       createBoard(9, 630);
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-normal").addEventListener("click", () => {
       createBoard(8, 560);
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
       createBoard(7, 490);
+      countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
   };
 
   modales();
-  /*Info Button*/
+
+  /*Button Info */
   let info = false;
   $("#info-btn").addEventListener("click", () => {
     info = true;
@@ -77,4 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+/*  */
+  const countdown = () => {
+    let seconds = document.getElementById("countdown").textContent;
+    let countdown = setInterval(function () {
+      seconds--;
+      document.getElementById("countdown").textContent = seconds;
+      if (seconds <= 0) clearInterval(countdown);
+    }, 1000);
+  };
+  
 });
