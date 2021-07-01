@@ -29,9 +29,8 @@
       <!--CAJA JUEGO-->
       <div class="grilla"></div>
       <!--TIMER-->
-      <div id="box-tiempo">
-       
-        </div>
+      <div class="timer" id="tiempo">
+        <span>00:</span><span id="countdown">30</span>
       </div>
     </div>
 
@@ -77,7 +76,8 @@
       </div>
     </div>
 
-       <!--Modal Reiniciar Juego -->
+    <<<<<<< HEAD
+    <!--Modal Reiniciar Juego -->
     <div
       class="modal oculto"
       id="modal-reiniciar-juego"
@@ -94,6 +94,24 @@
       </div>
     </div>
 
+    =======
+    <!--Modal Juego terminado -->
+    <div
+      class="modal oculto"
+      id="modal-juego-terminado"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h2 class="modal-titulo">¡Juego terminado!</h2>
+      <div class="modal-contenido">
+        <p class="modal-texto">Puntaje final: 00</p>
+      </div>
+      <div class="modal-botones">
+        <button class="boton" id="btn-nuevo-juego">Nuevo juego</button>
+        <button class="boton" id="btn-reiniciar-juego">reiniciar</button>
+      </div>
+    </div>
+    >>>>>>> origin/Lina
     <script src="./app.js"></script>
   </body>
 </html>
