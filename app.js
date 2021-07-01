@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* Grilla */
-  function createBoard(tamanio, lado) {
+  const createBoard = (tamanio, lado) => {
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
       square.setAttribute("class", "item");
@@ -38,7 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
       grilla.appendChild(square);
       squares.push(square);
     }
-  }
+  };
+
+  const clearBoard = () => {};
 
   /*Bloqueo Modales*/
 
@@ -51,18 +53,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $("#btn-modo-facil").addEventListener("click", () => {
+      clearBoard();
       createBoard(9, 630);
       countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-normal").addEventListener("click", () => {
+      clearBoard();
       createBoard(8, 560);
       countdown();
       //startGame();
       $("#modal-nuevo-juego").classList.add("oculto");
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
+      clearBoard();
       createBoard(7, 490);
       countdown();
       //startGame();
@@ -72,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modales();
 
-  /*Info Button*/
   /*Button Info */
   let info = false;
   $("#info-btn").addEventListener("click", () => {
@@ -87,9 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /*Refresh Button*/
-  let refresh = false;
+
   $("#refresh-btn").addEventListener("click", () => {
-    refresh = true;
     //Timer must stop
     $("#modal-reiniciar-juego").classList.remove("oculto");
   });
@@ -99,9 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   $("#btn-nuevo-juego").addEventListener("click", () => {
+    $("#modal-reiniciar-juego").classList.add("oculto");
     $("#modal-nuevo-juego").classList.remove("oculto");
   });
-  /*  */
+
+  /* Timer */
   const countdown = () => {
     let seconds = document.getElementById("countdown").textContent;
     let countdown = setInterval(function () {
