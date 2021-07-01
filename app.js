@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /*Bloqueo Modales*/
+
   /* Inicializar modales */
 
   const modales = () => {
@@ -69,15 +71,33 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   modales();
+
   /*Info Button*/
   let info = false;
   $("#info-btn").addEventListener("click", () => {
     info = true;
+    //Timer must stop
     $("#modal-bienvenida").classList.remove("oculto");
     if (info) {
       $("#btn-jugar").addEventListener("click", () => {
         $("#modal-nuevo-juego").classList.add("oculto");
       });
     }
+  });
+
+  /*Refresh Button*/
+  let refresh = false;
+  $("#refresh-btn").addEventListener("click", () => {
+    refresh = true;
+    //Timer must stop
+    $("#modal-reiniciar-juego").classList.remove("oculto");
+  });
+
+  $("#btn-cancelar").addEventListener("click", () => {
+    $("#modal-reiniciar-juego").classList.add("oculto");
+  });
+
+  $("#btn-nuevo-juego").addEventListener("click", () => {
+    $("#modal-nuevo-juego").classList.remove("oculto");
   });
 });

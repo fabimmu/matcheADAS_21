@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script
       src="https://kit.fontawesome.com/46da04e41b.js"
       crossorigin="anonymous"
@@ -19,18 +18,21 @@
       <!--MANDO CONTROL-->
       <div id="panelControl">
         <div class="puntaje disp_row">
-          <p>Combo x</p>
+          <p class="margin-right-medio">Combo x</p>
           <p>Puntos:</p>
         </div>
         <div class="controles disp_row">
-          <i id="info-btn" class="fas fa-info-circle"></i>
-          <i class="fas fa-redo-alt"></i>
+          <i id="info-btn" class="margin-right-tiny fas fa-info-circle"></i>
+          <i id="refresh-btn" class="fas fa-redo-alt"></i>
         </div>
       </div>
       <!--CAJA JUEGO-->
       <div class="grilla"></div>
       <!--TIMER-->
-      <div id="tiempo"></div>
+      <div id="box-tiempo">
+       
+        </div>
+      </div>
     </div>
 
     <!-- Modal Bienvenida -->
@@ -74,6 +76,24 @@
         <button class="boton" id="btn-modo-dificil">Difícil</button>
       </div>
     </div>
+
+       <!--Modal Reiniciar Juego -->
+    <div
+      class="modal oculto"
+      id="modal-reiniciar-juego"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h2 class="modal-titulo">Reiniciar Juego?</h2>
+      <div class="modal-contenido">
+        <p class="modal-texto">Perderás todo tu puntaje acumulado!</p>
+      </div>
+      <div class="modal-botones">
+        <button class="boton" id="btn-cancelar">Cancelar</button>
+        <button class="boton" id="btn-nuevo-juego">Nuevo Juego</button>
+      </div>
+    </div>
+
     <script src="./app.js"></script>
   </body>
 </html>
