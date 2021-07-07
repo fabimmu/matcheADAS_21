@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const createBoard = (tamanio, lado) => {
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
+      square.setAttribute("id", "u");
       square.setAttribute("class", "item");
+      square.setAttribute("draggable", "true");
       square.style.backgroundImage = random();
       grilla.style.width = `${lado}px`;
       grilla.style.height = `${lado}px`;
@@ -40,10 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const clearBoard = () => {};
-
-  /*Bloqueo Modales*/
-
+  const clearBoard = () => {
+    $(".grilla").innerHTML = "";
+  };
   /* Inicializar modales */
 
   const modales = () => {
@@ -81,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let info = false;
   $("#info-btn").addEventListener("click", () => {
     info = true;
+    document.body.appendChild(overlay);
     //Timer must stop
     $("#modal-bienvenida").classList.remove("oculto");
     if (info) {
@@ -115,4 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (seconds <= 0) clearInterval(countdown);
     }, 1000);
   };
+
+  /*DRAG*/
 });
