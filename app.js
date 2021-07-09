@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
-      square.setAttribute("id", "u");
+      square.setAttribute("id", "frutita");
       square.setAttribute("class", "item");
       square.setAttribute("draggable", "true");
       square.style.backgroundImage = random();
@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       grilla.appendChild(square);
       squares.push(square);
+
+      //Seleccionar item
+      square.addEventListener("click", () => {
+        square.style.opacity = "0.5";
+      });
     }
   };
 
@@ -157,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
       duracion--;
       tiempoRestante = duracion;
       document.getElementById("countdown").textContent = tiempoRestante;
-      console.log(tiempoRestante);
       if (tiempoRestante == 0) {
         clearInterval(timedown);
         gameOver();
@@ -172,7 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
     timedown = setInterval(function () {
       tiempoRestante--;
       document.getElementById("countdown").textContent = tiempoRestante;
-      console.log(tiempoRestante);
       if (tiempoRestante == 0) {
         clearInterval(timedown);
         gameOver();
