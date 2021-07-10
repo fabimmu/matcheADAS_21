@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let score = 0;
   let dificultad = "";
   let duracion = 5;
+  let tiempoRestante = null;
   timedown = null;
 
   const $ = (selector) => document.querySelector(selector);
@@ -48,6 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
       square.addEventListener("dragenter", dragEnter);
       square.addEventListener("drageleave", dragLeave);
       square.addEventListener("drop", dragDrop);
+      //Seleccionar item
+      square.addEventListener("click", () => {
+        square.style.opacity = "0.5";
+      });
     }
   };
 
@@ -95,21 +100,21 @@ document.addEventListener("DOMContentLoaded", () => {
       createBoard(9, 630);
       dificultad = "facil";
       $("#modal-nuevo-juego").classList.add("oculto");
-      refreshTimer();
+      restartTimer();
     });
     $("#btn-modo-normal").addEventListener("click", () => {
       clearBoard();
       createBoard(8, 560);
       dificultad = "normal";
       $("#modal-nuevo-juego").classList.add("oculto");
-      refreshTimer();
+      restartTimer();
     });
     $("#btn-modo-dificil").addEventListener("click", () => {
       clearBoard();
       createBoard(7, 490);
       dificultad = "dificil";
       $("#modal-nuevo-juego").classList.add("oculto");
-      refreshTimer();
+      restartTimer();
     });
   };
 
@@ -125,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (info) {
       $("#btn-jugar").addEventListener("click", () => {
         $("#modal-nuevo-juego").classList.add("oculto");
+        continueTimer();
       });
     }
   });
@@ -132,11 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
   /*Refresh Button*/
 
   $("#refresh-btn").addEventListener("click", () => {
+    //Timer must stop
+    clearInterval(timedown);
     $("#modal-reiniciar-juego").classList.remove("oculto");
   });
 
   $("#btn-cancelar").addEventListener("click", () => {
     $("#modal-reiniciar-juego").classList.add("oculto");
+    continueTimer();
   });
 
   $("#btn-nuevo-juego").addEventListener("click", () => {
@@ -161,17 +170,17 @@ document.addEventListener("DOMContentLoaded", () => {
         case "facil":
           clearBoard();
           createBoard(9, 630);
-          refreshTimer();
+          restartTimer();
           break;
         case "normal":
           clearBoard();
           createBoard(8, 560);
-          refreshTimer();
+          restartTimer();
           break;
         case "dificil":
           clearBoard();
           createBoard(7, 490);
-          refreshTimer();
+          restartTimer();
           break;
       }
     });
@@ -181,16 +190,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const countdown = () => {
     timedown = setInterval(function () {
       duracion--;
-      document.getElementById("countdown").textContent = duracion;
-      if (duracion == 0) {
+      tiempoRestante = duracion;
+      document.getElementById("countdown").textContent = tiempoRestante;
+      if (tiempoRestante == 0) {
         clearInterval(timedown);
         gameOver();
       }
     }, 1000);
   };
-
-  const refreshTimer = () => {
+  const restartTimer = () => {
     duracion = 5;
     document.getElementById("countdown").textContent = duracion;
+  };
+  const continueTimer = () => {
+    timedown = setInterval(function () {
+      tiempoRestante--;
+      document.getElementById("countdown").textContent = tiempoRestante;
+      if (tiempoRestante == 0) {
+        clearInterval(timedown);
+        gameOver();
+      }
+    }, 1000);
   };
 });
