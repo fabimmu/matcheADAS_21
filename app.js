@@ -20,20 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   /* Random */
-
   const random = () => {
     const indice = Math.floor(Math.random() * frutas.length);
     return frutas[indice];
   };
 
-  /* Grilla */
+  /* Creando Grilla */
   const createBoard = (tamanio, lado) => {
     countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
-      square.setAttribute("id", "frutita");
+      square.setAttribute("id", "i");
       square.setAttribute("class", "item");
-      square.setAttribute("draggable", "true");
+      square.setAttribute("draggable", true);
       square.style.backgroundImage = random();
       grilla.style.width = `${lado}px`;
       grilla.style.height = `${lado}px`;
@@ -41,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let item of elementos) {
         item.style.backgroundSize = "cover";
       }
-
       grilla.appendChild(square);
       squares.push(square);
 
@@ -52,9 +50,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  /* Limpiando Grilla */
   const clearBoard = () => {
     $(".grilla").innerHTML = "";
   };
+
+  /* Mover item */
+
+  let fruitBeingDragged;
+  let fruitBeingReplaced;
+  let squareIdBeingDragged;
+  let squareIdBeingReplaced;
+
+  squares.forEach((square) => square.addEventListener("dragstart", dragStart));
+  squares.forEach((square) => square.addEventListener("dragend", dragEnd));
+  squares.forEach((square) => square.addEventListener("dragover", dragOver));
+  squares.forEach((square) => square.addEventListener("dragenter", dragEnter));
+  squares.forEach((square) => square.addEventListener("drageleave", dragLeave));
+  squares.forEach((square) => square.addEventListener("drop", dragDrop));
+
+  const dragStart = () => {
+    console.log(this.id, "dragstart");
+  };
+  const dragEnd = () => {
+    console.log(this.id, "dragend");
+  };
+  const dragOver = () => {
+    console.log(this.id, "dragover");
+  };
+  const dragEnter = () => {
+    console.log(this.id, "dragenter");
+  };
+  const dragLeave = () => {
+    console.log(this.id, "drageleave");
+  };
+  const dragDrop = () => {
+    console.log(this.id, "drop");
+  };
+
   /* Inicializar modales */
 
   const modales = () => {
@@ -94,8 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#info-btn").addEventListener("click", () => {
     info = true;
     clearInterval(timedown);
-    //document.body.appendChild(overlay);
-    //Timer must stop
     $("#modal-bienvenida").classList.remove("oculto");
     if (info) {
       $("#btn-jugar").addEventListener("click", () => {
