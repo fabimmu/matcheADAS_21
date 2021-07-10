@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Creando Grilla */
   const createBoard = (tamanio, lado) => {
-    countdown();
+    //countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
-      square.setAttribute("id", "i");
+      square.setAttribute("id", i);
       square.setAttribute("class", "item");
       square.setAttribute("draggable", true);
       square.style.backgroundImage = random();
@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
       squares.push(square);
 
       square.addEventListener("dragstart", dragStart);
-      square.addEventListener("dragend", dragEnd);
       square.addEventListener("dragover", dragOver);
       square.addEventListener("dragenter", dragEnter);
-      square.addEventListener("drageleave", dragLeave);
-      square.addEventListener("drop", dragDrop);
+      square.addEventListener("dragleave", dragLeave);
+      square.addEventListener("drop", (e) => dragDrop(tamanio, e));
+
       //Seleccionar item
       square.addEventListener("click", () => {
         square.style.opacity = "0.5";
@@ -62,29 +62,43 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* Mover item */
-
-  let fruitBeingDragged;
-  let fruitBeingReplaced;
-  let squareIdBeingDragged;
-  let squareIdBeingReplaced;
+  let fruitDragged;
+  let fruitReplaced;
+  let squareIdDragged;
+  let squareIdReplaced;
 
   const dragStart = (e) => {
-    console.log(e.target.id, "dragstart");
+    fruitDragged = e.target.style.backgroundImage;
+    squareIdDragged = parseInt(e.target.id);
   };
-  const dragEnd = (e) => {
-    console.log(e.target.id, "dragend");
-  };
+
   const dragOver = (e) => {
-    console.log(e.target.id, "dragover");
+    e.preventDefault();
   };
   const dragEnter = (e) => {
-    console.log(e.target.id, "dragenter");
+    e.preventDefault();
   };
   const dragLeave = (e) => {
-    console.log(e.target.id, "drageleave");
+    if (squareIdDragged == e.target.id) {
+      e.target.style.backgroundImage = "";
+    }
   };
-  const dragDrop = (e) => {
-    console.log(e.target.id, "drop");
+  const dragDrop = (tamanio, e) => {
+    let validMoves = [
+      squareIdDragged - 1,
+      squareIdDragged - tamanio,
+      squareIdDragged + 1,
+      squareIdDragged + tamanio,
+    ];
+
+    fruitReplaced = e.target.style.backgroundImage;
+    squareIdReplaced = parseInt(e.target.id);
+
+    let validMove = validMoves.includes(squareIdReplaced);
+    if (validMove) {
+      squares[squareIdReplaced].style.backgroundImage = fruitDragged;
+      squares[squareIdDragged].style.backgroundImage = fruitReplaced;
+    }
   };
 
   /* Inicializar modales */
@@ -187,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* Timer */
-  const countdown = () => {
+  /* const countdown = () => {
     timedown = setInterval(function () {
       duracion--;
       tiempoRestante = duracion;
@@ -197,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gameOver();
       }
     }, 1000);
-  };
+  }; */
   const restartTimer = () => {
     duracion = 5;
     document.getElementById("countdown").textContent = duracion;
