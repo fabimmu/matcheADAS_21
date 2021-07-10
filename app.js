@@ -19,20 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   /* Random */
-
   const random = () => {
     const indice = Math.floor(Math.random() * frutas.length);
     return frutas[indice];
   };
 
-  /* Grilla */
+  /* Creando Grilla */
   const createBoard = (tamanio, lado) => {
     countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
-      square.setAttribute("id", "u");
+      square.setAttribute("id", "i");
       square.setAttribute("class", "item");
-      square.setAttribute("draggable", "true");
+      square.setAttribute("draggable", true);
       square.style.backgroundImage = random();
       grilla.style.width = `${lado}px`;
       grilla.style.height = `${lado}px`;
@@ -40,15 +39,49 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let item of elementos) {
         item.style.backgroundSize = "cover";
       }
-
       grilla.appendChild(square);
       squares.push(square);
+
+      square.addEventListener("dragstart", dragStart);
+      square.addEventListener("dragend", dragEnd);
+      square.addEventListener("dragover", dragOver);
+      square.addEventListener("dragenter", dragEnter);
+      square.addEventListener("drageleave", dragLeave);
+      square.addEventListener("drop", dragDrop);
     }
   };
 
+  /* Limpiando Grilla */
   const clearBoard = () => {
     $(".grilla").innerHTML = "";
   };
+
+  /* Mover item */
+
+  let fruitBeingDragged;
+  let fruitBeingReplaced;
+  let squareIdBeingDragged;
+  let squareIdBeingReplaced;
+
+  const dragStart = (e) => {
+    console.log(e.target.id, "dragstart");
+  };
+  const dragEnd = (e) => {
+    console.log(e.target.id, "dragend");
+  };
+  const dragOver = (e) => {
+    console.log(e.target.id, "dragover");
+  };
+  const dragEnter = (e) => {
+    console.log(e.target.id, "dragenter");
+  };
+  const dragLeave = (e) => {
+    console.log(e.target.id, "drageleave");
+  };
+  const dragDrop = (e) => {
+    console.log(e.target.id, "drop");
+  };
+
   /* Inicializar modales */
 
   const modales = () => {
@@ -88,8 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#info-btn").addEventListener("click", () => {
     info = true;
     clearInterval(timedown);
-    //document.body.appendChild(overlay);
-    //Timer must stop
     $("#modal-bienvenida").classList.remove("oculto");
     if (info) {
       $("#btn-jugar").addEventListener("click", () => {
@@ -101,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /*Refresh Button*/
 
   $("#refresh-btn").addEventListener("click", () => {
-    //Timer must stop
     $("#modal-reiniciar-juego").classList.remove("oculto");
   });
 
