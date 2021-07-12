@@ -11,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const $$ = (selector) => document.querySelectorAll(selector);
 
   const frutas = [
-    "url(./styles/img/1F34B_color.png)",
-    "url(./styles/img/1F95D_color.png)",
-    "url(./styles/img/1F349_color.png)",
-    "url(./styles/img/1F351_color.png",
-    "url(./styles/img/1F352_color.png)",
-    "url(./styles/img/1F965_color.png)",
+    "url(./styles/img/limon.png)",
+    "url(./styles/img/kiwi.png)",
+    "url(./styles/img/sandia.png)",
+    "url(./styles/img/melocoton.png",
+    "url(./styles/img/cereza.png)",
+    "url(./styles/img/coco.png)",
   ];
 
   /* Random */
@@ -43,22 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
       grilla.appendChild(square);
       squares.push(square);
 
-      square.addEventListener("dragstart", dragStart);
-      square.addEventListener("dragover", dragOver);
-      square.addEventListener("dragenter", dragEnter);
-      square.addEventListener("dragleave", dragLeave);
-      square.addEventListener("drop", (e) => dragDrop(tamanio, e));
+      squares.forEach((square) =>
+        square.addEventListener("dragstart", dragStart)
+      );
+      squares.forEach((square) =>
+        square.addEventListener("dragend", (e) => dragEnd(tamanio, e))
+      );
+      squares.forEach((square) =>
+        square.addEventListener("dragover", dragOver)
+      );
+      squares.forEach((square) =>
+        square.addEventListener("dragenter", dragEnter)
+      );
+      squares.forEach((square) =>
+        square.addEventListener("dragleave", dragLeave)
+      );
+      squares.forEach((square) => square.addEventListener("drop", dragDrop));
 
       //Seleccionar item
       square.addEventListener("click", () => {
         square.style.opacity = "0.5";
       });
     }
-  };
-
-  /* Limpiando Grilla */
-  const clearBoard = () => {
-    $(".grilla").innerHTML = "";
   };
 
   /* Mover item */
@@ -68,37 +74,89 @@ document.addEventListener("DOMContentLoaded", () => {
   let squareIdReplaced;
 
   const dragStart = (e) => {
+    //Setea las variables Dragged iniciales
     fruitDragged = e.target.style.backgroundImage;
     squareIdDragged = parseInt(e.target.id);
+    console.log(
+      { fruitDragged },
+      e.target.id,
+      { squareIdDragged },
+      "dragStart"
+    );
   };
 
   const dragOver = (e) => {
+    //Identifica cada que el elemento a mover está pasando sobre otro elemento de la grilla
     e.preventDefault();
+    //console.log(e.target.id, "dragOver");
   };
+
   const dragEnter = (e) => {
+    //Identifica cuando el elemento a mover entra a otro square de la grilla
     e.preventDefault();
+    //console.log(e.target.id, "dragEnter");
   };
+
   const dragLeave = (e) => {
+    // Deja en blanco el square origen e identifica cuando sale del square origen
     if (squareIdDragged == e.target.id) {
       e.target.style.backgroundImage = "";
     }
+    // console.log(e.target.id, "dragLeave", { squareIdDragged });
   };
-  const dragDrop = (tamanio, e) => {
+
+  const dragDrop = (e) => {
+    //Ejecuta el intercambio de frutas
+    timeOut = setTimeout(() => {
+      fruitReplaced = e.target.style.backgroundImage;
+      squareIdReplaced = parseInt(e.target.id);
+      e.target.style.backgroundImage = fruitDragged;
+      squares[squareIdDragged].style.backgroundImage = fruitReplaced;
+      console.log(
+        { fruitReplaced },
+        e.target.id,
+        { squareIdReplaced },
+        "dragDrop"
+      );
+    }, 200);
+  };
+
+  const dragEnd = (tamanio, e) => {
     let validMoves = [
-      squareIdDragged - 1,
-      squareIdDragged - tamanio,
-      squareIdDragged + 1,
-      squareIdDragged + tamanio,
+      squareIdDragged - 1, //Izquierda 5
+      squareIdDragged - tamanio, //Arriba -1
+      squareIdDragged + 1, //Derecha 7
+      squareIdDragged + tamanio, //Abajo 13
     ];
 
-    fruitReplaced = e.target.style.backgroundImage;
-    squareIdReplaced = parseInt(e.target.id);
-
     let validMove = validMoves.includes(squareIdReplaced);
-    if (validMove) {
-      squares[squareIdReplaced].style.backgroundImage = fruitDragged;
-      squares[squareIdDragged].style.backgroundImage = fruitReplaced;
+    console.log("Include " + validMove);
+
+    if (squareIdReplaced && validMove) {
+      console.log("Entró 1");
+      squares[squareIdReplaced].style.backgroundImage = fruitReplaced;
+      squares[squareIdDragged].style.backgroundImage = fruitDragged;
+
+      console.log(
+        { fruitDragged, fruitReplaced, squareIdDragged, squareIdReplaced },
+        e.target.id,
+        "dragEnd1"
+      );
+    } else {
+      console.log("Entró 2");
+      squareIdReplaced = null;
+
+      console.log(
+        { fruitDragged, fruitReplaced, squareIdDragged, squareIdReplaced },
+        e.target.id,
+        "dragEnd2"
+      );
     }
+  };
+
+  /* Limpiando Grilla */
+  const clearBoard = () => {
+    $(".grilla").innerHTML = "";
   };
 
   /* Inicializar modales */
