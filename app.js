@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let duracion = 5;
   let tiempoRestante = null;
   timedown = null;
+  let imageAux = "";
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => document.querySelectorAll(selector);
@@ -43,16 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
       grilla.appendChild(square);
       squares.push(square);
     }
+
     squares.forEach((square) =>
       square.addEventListener("dragstart", dragStart)
     );
     squares.forEach((square) =>
-      square.addEventListener("dragend", (e) => dragEnd(tamanio, e))
-    );
-    squares.forEach((square) => square.addEventListener("dragover", dragOver));
-    squares.forEach((square) =>
       square.addEventListener("dragenter", dragEnter)
     );
+    squares.forEach((square) => square.addEventListener("dragover", dragOver));
     squares.forEach((square) =>
       square.addEventListener("dragleave", dragLeave)
     );
@@ -61,10 +60,83 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
 
+  /* Mover item */
+  let fruitDragged;
+  let fruitReplaced;
+  let squareIdDragged;
+  let squareIdReplaced;
+
+  const dragStart = (e) => {
+    //Setea las variables Dragged iniciales
+    fruitDragged = e.target.style.backgroundImage;
+    squareIdDragged = parseInt(e.target.id);
+
+    console.log("dragStart: ", {
+      fruitDragged,
+      squareIdDragged,
+      fruitReplaced,
+      squareIdReplaced,
+    });
+  };
+
+  const dragOver = (e) => {
+    //Este evento se activa cuando el ratón/mouse se mueve SOBRE un elemento cuando está teniendo lugar una operación de arrastre
+    e.preventDefault();
+  };
+
+  const dragEnter = (e) => {
+    //Se dispara cuando el ratón/mouse se mueve PRIMERO sobre un elemento, mientras está teniendo lugar una operación de arrastre.
+    e.preventDefault();
+  };
+
+  const dragLeave = (e) => {
+    // Deja en blanco el square origen
+    imageAux = fruitDragged;
+    squares[squareIdDragged].style.backgroundImage = "";
+    console.log("dragLeave: ", {
+      fruitDragged,
+      squareIdDragged,
+      fruitReplaced,
+      squareIdReplaced,
+    });
+  };
+
+  const dragDrop = (tamanio, e) => {
+    fruitReplaced = e.target.style.backgroundImage;
+    squareIdReplaced = parseInt(e.target.id);
+
+    console.log("dragDrop: ", {
+      fruitDragged,
+      squareIdDragged,
+      fruitReplaced,
+      squareIdReplaced,
+    });
+    //Ejecuta el intercambio de frutas
+
+    let validMoves = [
+      squareIdDragged - 1, //Izquierda
+      squareIdDragged - tamanio, //Arriba
+      squareIdDragged + 1, //Derecha
+      squareIdDragged + tamanio, //Abajo
+    ];
+    let validMove = validMoves.includes(squareIdReplaced);
+
+    if (validMove) {
+      squares[squareIdDragged].style.backgroundImage = fruitReplaced;
+      squares[squareIdReplaced].style.backgroundImage = fruitDragged;
+    } else if (!validMove && squareIdDragged == squareIdReplaced) {
+      squares[squareIdDragged].style.backgroundImage = imageAux;
+    } else {
+      squares[squareIdDragged].style.backgroundImage = fruitDragged;
+      squares[squareIdReplaced].style.backgroundImage = fruitReplaced;
+    }
+  };
+
   /* Limpiando Grilla */
   const clearBoard = () => {
     $(".grilla").innerHTML = "";
   };
+
   /* Timer */
   /* const countdown = () => {
     timedown = setInterval(function () {
