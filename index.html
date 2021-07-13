@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
+    
     <script
       src="https://kit.fontawesome.com/46da04e41b.js"
       crossorigin="anonymous"
@@ -34,82 +35,7 @@
         ><span id="countdown">5</span>
       </div>
     </div>
-
-    <!-- Modal Bienvenida -->
-    <div class="modal" id="modal-bienvenida" role="dialog" aria-modal="true">
-      <h2 class="modal-titulo">¡Bienvenida!</h2>
-      <div class="modal-contenido">
-        <p class="modal-texto">
-          En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo,
-          ya sea en fila o columna. Para eso, selecciona un ítem y a
-          continuación un ítem adyacente para intercambiarlos de lugar.
-        </p>
-
-        <p class="modal-texto">
-          Si se forma un grupo, esos ítems se eliminarán y ganarás puntos.
-          ¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!
-        </p>
-        <strong class="modal-texto">controles</strong>
-        <p>Click izquierdo: selección</p>
-        <p>Enter o Espacio: selección</p>
-        <p>Flechas o WASD: movimiento e intercambio</p>
-      </div>
-      <div class="modal-botones">
-        <button class="boton" id="btn-jugar">A Jugar!</button>
-      </div>
-    </div>
-
-    <!--Modal Nuevo Juego -->
-    <div
-      class="modal oculto"
-      id="modal-nuevo-juego"
-      role="dialog"
-      aria-modal="true"
-    >
-      <h2 class="modal-titulo">Nuevo Juego</h2>
-      <div class="modal-contenido">
-        <p class="modal-texto">Seleccione una dificultad</p>
-      </div>
-      <div class="modal-botones">
-        <button class="boton" id="btn-modo-facil">Fácil</button>
-        <button class="boton" id="btn-modo-normal">Normal</button>
-        <button class="boton" id="btn-modo-dificil">Difícil</button>
-      </div>
-    </div>
-
-    <!--Modal Reiniciar Juego -->
-    <div
-      class="modal oculto"
-      id="modal-reiniciar-juego"
-      role="dialog"
-      aria-modal="true"
-    >
-      <h2 class="modal-titulo">Reiniciar Juego?</h2>
-      <div class="modal-contenido">
-        <p class="modal-texto">Perderás todo tu puntaje acumulado!</p>
-      </div>
-      <div class="modal-botones">
-        <button class="boton" id="btn-cancelar">Cancelar</button>
-        <button class="boton" id="btn-nuevo-juego">Nuevo Juego</button>
-      </div>
-    </div>
-
-    <!--Modal Juego terminado -->
-    <div
-      class="modal oculto"
-      id="modal-juego-terminado"
-      role="dialog"
-      aria-modal="true"
-    >
-      <h2 class="modal-titulo">¡Juego terminado!</h2>
-      <div class="modal-contenido">
-        <p class="modal-texto">Puntaje final: 00</p>
-      </div>
-      <div class="modal-botones">
-        <button class="boton" id="btn-nuevo-juego2">Nuevo juego</button>
-        <button class="boton" id="btn-reiniciar-juego">Reiniciar</button>
-      </div>
-    </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="./app.js"></script>
   </body>
