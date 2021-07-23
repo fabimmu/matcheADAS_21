@@ -59,6 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     squares.forEach((square) =>
       square.addEventListener("drop", (e) => dragDrop(tamanio, e))
     );
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 
     //MATCHES
 
@@ -86,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+<<<<<<< Updated upstream
   };
   // const matchFila3 = (tamanio) => {
   //   for (i = 0; i < tamanio * tamanio - 3; i++) {
@@ -128,6 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   };
 
   // Nuevas Frutas
