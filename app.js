@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const squares = [];
   let score = 0;
   let dificultad = "";
-  let duracion = 5;
+  let duracion = 10;
   let tiempoRestante = null;
   timedown = null;
   let imageAux = "";
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Creando Grilla */
   const createBoard = (tamanio, lado) => {
-    //countdown();
+    countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
       square.setAttribute("id", i);
@@ -59,11 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     squares.forEach((square) =>
       square.addEventListener("drop", (e) => dragDrop(tamanio, e))
     );
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 
     //MATCHES
 
@@ -91,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-<<<<<<< Updated upstream
   };
   // const matchFila3 = (tamanio) => {
   //   for (i = 0; i < tamanio * tamanio - 3; i++) {
@@ -134,9 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   };
 
   // Nuevas Frutas
@@ -213,19 +204,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* Timer */
-  /* const countdown = () => {
+  const countdown = () => {
     timedown = setInterval(function () {
       duracion--;
       tiempoRestante = duracion;
       document.getElementById("countdown").textContent = tiempoRestante;
       if (tiempoRestante == 0) {
         clearInterval(timedown);
-        gameOver();
+        swalGameOver();
       }
     }, 1000);
-  }; */
+  }; 
   const restartTimer = () => {
-    duracion = 5;
+    duracion = 10;
     document.getElementById("countdown").textContent = duracion;
   };
   const continueTimer = () => {
@@ -234,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("countdown").textContent = tiempoRestante;
       if (tiempoRestante == 0) {
         clearInterval(timedown);
-        gameOver();
+        swalGameOver();
       }
     }, 1000);
   };
@@ -280,20 +271,17 @@ document.addEventListener("DOMContentLoaded", () => {
         case "facil":
           clearBoard();
           createBoard(9, 630);
-          //updatingWindow(9);
-          //restartTimer();
+          restartTimer();
           break;
         case "normal":
           clearBoard();
           createBoard(8, 560);
-          //updatingWindow(8);
-          //restartTimer();
+          restartTimer();
           break;
         case "dificil":
           clearBoard();
           createBoard(7, 490);
-          //updatingWindow(7);
-          //restartTimer();
+          restartTimer();
           break;
       }
     });
@@ -333,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then((value) => {
       if (value === "resetear") {
         swalNiveles();
+        restartTimer();
       }
     });
   };
@@ -353,6 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshBtn = document.getElementById("refresh-btn");
   refreshBtn.addEventListener("click", () => {
     swalreiniciar();
+    continueTimer();
   });
   //Valida cada 1sg
   // const updatingWindow = (tamanio) => {
