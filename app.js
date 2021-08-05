@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const squares = [];
   let score = 0;
   let dificultad = "";
-  let duracion = 5;
+  let duracion = 10;
   let tiempoRestante = null;
   timedown = null;
   let imageAux = "";
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Creando Grilla */
   const createBoard = (tamanio, lado) => {
-    //countdown();
+    countdown();
     for (let i = 0; i <= tamanio * tamanio; i++) {
       const square = document.createElement("div");
       square.setAttribute("id", i);
@@ -61,9 +61,83 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     //MATCHES
-    matchFila3();
+
+    matchFila3(tamanio);
+    matchFila4(tamanio);
+    dropNewFruits(tamanio);
+  };
+  const matchFila3 = (tamanio) => {
+    for (let i = 0; i < tamanio * tamanio - 3; i++) {
+      let fila3 = [i, i + 1, i + 2];
+      let selectedFruit = squares[i].style.backgroundImage;
+      const isBlank = squares[i].style.backgroundImage === "";
+      if (
+        fila3.every(
+          (index) =>
+            squares[index].style.backgroundImage === selectedFruit &&
+            isBlank == false
+        )
+      ) {
+        score += 3;
+        $("#scoreDisplay").innerHTML = score;
+
+        fila3.forEach((index) => {
+          squares[index].style.backgroundImage = "";
+        });
+      }
+    }
+  };
+  // const matchFila3 = (tamanio) => {
+  //   for (i = 0; i < tamanio * tamanio - 3; i++) {
+  //     let fila3 = [i, i++];
+  //     let selectedFruit = squares[i].style.backgroundImage;
+  //     const isBlank = squares[i].style.backgroundImage === "";
+  //     if (
+  //       fila3.every(
+  //         (index) =>
+  //           squares[index].style.backgroundImage === selectedFruit &&
+  //           isBlank == false
+  //       )
+  //     ) {
+  //       score += 3;
+  //       $("#scoreDisplay").innerHTML = score;
+
+  //       fila3.forEach((index) => {
+  //         squares[index].style.backgroundImage = "";
+  //       });
+  //     }
+  //   }
+  // };
+  const matchFila4 = (tamanio) => {
+    for (let i = 0; i < tamanio * tamanio - 4; i++) {
+      let fila4 = [i, i + 1, i + 2, i + 3];
+      let selectedFruit = squares[i].style.backgroundImage;
+      const isBlank = squares[i].style.backgroundImage === "";
+      if (
+        fila4.every(
+          (index) =>
+            squares[index].style.backgroundImage === selectedFruit &&
+            isBlank == false
+        )
+      ) {
+        score += 3;
+        $("#scoreDisplay").innerHTML = score;
+
+        fila4.forEach((index) => {
+          squares[index].style.backgroundImage = "";
+        });
+      }
+    }
   };
 
+  // Nuevas Frutas
+  const dropNewFruits = (tamanio) => {
+    for (i = 0; i < tamanio * tamanio; i++) {
+      if (squares[i].style.backgroundImage === "") {
+        squares[i].style.backgroundImage = random();
+      }
+    }
+  };
   /* Mover item */
   let fruitDragged;
   let fruitReplaced;
@@ -74,13 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Setea las variables Dragged iniciales
     fruitDragged = e.target.style.backgroundImage;
     squareIdDragged = parseInt(e.target.id);
-
-    // console.log("dragStart: ", {
-    //   fruitDragged,
-    //   squareIdDragged,
-    //   fruitReplaced,
-    //   squareIdReplaced,
-    // });
   };
 
   const dragOver = (e) => {
@@ -96,34 +163,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const dragLeave = () => {
     imageAux = fruitDragged;
     squares[squareIdDragged].style.backgroundImage = "";
-
-    // console.log("dragLeave: ", {
-    //   fruitDragged,
-    //   squareIdDragged,
-    //   fruitReplaced,
-    //   squareIdReplaced,
-    //   imageAux,
-    // });
   };
 
   const dragEnd = (e) => {
     if (fruitReplaced == undefined && squareIdReplaced == undefined) {
       squares[squareIdDragged].style.backgroundImage = imageAux;
     }
-    // console.log("dragend");
   };
 
+  //Ejecuta el intercambio de frutas
   const dragDrop = (tamanio, e) => {
     fruitReplaced = e.target.style.backgroundImage;
     squareIdReplaced = parseInt(e.target.id);
-
-    // console.log("dragDrop: ", {
-    //   fruitDragged,
-    //   squareIdDragged,
-    //   fruitReplaced,
-    //   squareIdReplaced,
-    // });
-    //Ejecuta el intercambio de frutas
 
     let validMoves = [
       squareIdDragged - 1, //Izquierda
@@ -142,52 +193,30 @@ document.addEventListener("DOMContentLoaded", () => {
       squares[squareIdDragged].style.backgroundImage = fruitDragged;
       squares[squareIdReplaced].style.backgroundImage = fruitReplaced;
     }
-    // timer = setTimeout(matchFila3(tamanio), 2000);
-    // console.log({ timer });
-  };
-  //for row of Three
-  const matchFila3 = (tamanio) => {
-    console.log({ tamanio }, tamanio * tamanio - 3);
+    matchFila3(tamanio);
+    matchFila4(tamanio);
 
-    for (i = 0; i < tamanio * tamanio - 3; i++) {
-      let fila3 = [i, i + 1, i + 2];
-      let selectedFruit = squares[i].style.backgroundImage;
-      console.log({ selectedFruit });
-      const isBlank = squares[i].style.backgroundImage === "";
-      if (
-        fila3.every(
-          (index) =>
-            squares[index].style.backgroundImage === selectedFruit && !isBlank
-        )
-      ) {
-        score += 3;
-        $("#scoreDisplay").innerHTML = score;
-        fila3.forEach((index) => {
-          squares[index].style.backgroundImage = "";
-        });
-      }
-    }
+    dropNewFruits(tamanio);
   };
-
   /* Limpiando Grilla */
   const clearBoard = () => {
     $(".grilla").innerHTML = "";
   };
 
   /* Timer */
-  /* const countdown = () => {
+  const countdown = () => {
     timedown = setInterval(function () {
       duracion--;
       tiempoRestante = duracion;
       document.getElementById("countdown").textContent = tiempoRestante;
       if (tiempoRestante == 0) {
         clearInterval(timedown);
-        gameOver();
+        swalGameOver();
       }
     }, 1000);
-  }; */
+  }; 
   const restartTimer = () => {
-    duracion = 5;
+    duracion = 10;
     document.getElementById("countdown").textContent = duracion;
   };
   const continueTimer = () => {
@@ -196,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("countdown").textContent = tiempoRestante;
       if (tiempoRestante == 0) {
         clearInterval(timedown);
-        gameOver();
+        swalGameOver();
       }
     }, 1000);
   };
@@ -242,19 +271,17 @@ document.addEventListener("DOMContentLoaded", () => {
         case "facil":
           clearBoard();
           createBoard(9, 630);
-          //restartTimer();
+          restartTimer();
           break;
         case "normal":
-          console.log(value);
           clearBoard();
           createBoard(8, 560);
-          //restartTimer();
+          restartTimer();
           break;
         case "dificil":
-          console.log(value);
           clearBoard();
           createBoard(7, 490);
-          //restartTimer();
+          restartTimer();
           break;
       }
     });
@@ -294,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then((value) => {
       if (value === "resetear") {
         swalNiveles();
+        restartTimer();
       }
     });
   };
@@ -314,5 +342,17 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshBtn = document.getElementById("refresh-btn");
   refreshBtn.addEventListener("click", () => {
     swalreiniciar();
+    continueTimer();
   });
+  //Valida cada 1sg
+  // const updatingWindow = (tamanio) => {
+  //   console.log("updating window ", { tamanio });
+  //   matchFila3(tamanio);
+  //   matchFila4(tamanio);
+  //   dropNewFruits(tamanio);
+  // };
+  // window.setInterval(function () {
+  //   console.log("window ");
+  //   updatingWindow();
+  // }, 100);
 }); //DOM cierre
